@@ -47,3 +47,11 @@ Squirrel: I still don't believe you. A little bug like you would never try to sc
 Bug: Okay . . . you're right. I'm actually trying to prove my innocence to the birds.
 <<jump Reason1>>
 ===
+
+
+title: endOfLevel
+---
+Bug: Is there a village over there?
+Squirrel: It's my hometown, Chungusburg. I love it here but I'm an outlaw.
+Squirrel: All because I stabbed a guy for my bleuberry muffin.
+===
