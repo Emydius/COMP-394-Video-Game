@@ -1,11 +1,49 @@
-﻿title: Start
+﻿title: First
 ---
-Wow!
-My first ever Yarn script in Unity!
+Squirrel: Hey, who’s that? Get out of here!
 
--> Gosh!
--> Incredible!
--> I'm amazed!
+-> Bug: That's a very rude thing to say to a stranger. Learn some manners!
+	Squirrel: I guess you’re right, my apologies.
+-> Bug: Sorry, I’ll get out of your way!
+	Squirrel: Don't be so considerate! Show some backbone, you exoskeletal creature!
 
-Anyway, time to get writing!
+Bug: Well, it seems like you're looking for something. Did you lose anything?
+Squirrel: Yeah, I've lost my blueberry muffin. I've searched high and low but still, nothing.
+Bug: You lost your blueberry muffin? 
+Bug: Couldn't you just cook some more?
+Squirrel: It's not that simple!
+Squirrel: There's only one blueberry muffin in the world that's good enough for my tastebuds! It's the kind that my Grandma Squirrel makes!
+Bug: (Wonder how many Grandma Squirrels there are in this tree…)
+Squirrel: Wait, you're distracting me! I still don't know what a bug like you is doing this high up in the tree!
+->Bug: I'm on a journey to prove my innocence to the birds.
+    <<jump Reason1>>
+->Bug: I'm on a sightseeing tour!
+	Squirrel: I don't believe that for a second.
+    <<jump Reason2>>
+===
+
+title: Reason1
+---
+Squirrel: The birds, you say?
+Squirrel: That's an admirable goal, and certainly more important than my blueberry muffin.
+Bug: (He's changing his mind that quickly…?)
+Squirrel: Plus, I can search for my blueberry muffin any old time. I've got nothing but time!
+Squirrel: But you, this mission of yours is pressing! You're running out of time!
+Bug: I haven't even told you anything about my crime yet. 
+Squirrel: Oh, I know. But there's something about your eyes that tells me everything I need to know about you.
+Squirrel: Their intensity…their drive…why, I could sense your resolve from a mile away!
+Squirrel: I've made up my mind. I'm coming with you!
+Bug: Well, I certainly won't refuse…
+Squirrel: It's a deal then! And you're lucky I'm joining you now. You see, I'm a pretty fast runner if I do say so myself.
+Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes that I can count on both paws!
+Bug: Gee…that'd be super! I could work on my agility, that's for sure.
+Squirrel: Happy to help! Alright, here's a bit of the basics…
+===
+
+title: Reason2
+---
+Bug: You know . . . I just really want to see what this tree has to offer.
+Squirrel: I still don't believe you. A little bug like you would never try to scale the tree, not with the birds always prowling around!
+Bug: Okay . . . you're right. I'm actually trying to prove my innocence to the birds.
+<<jump Reason1>>
 ===

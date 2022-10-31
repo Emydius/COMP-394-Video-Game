@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
+
 
 public class SquirrelController : MonoBehaviour
-{
-    //public GameObject dialogueSystem; 
+{ 
+    private DialogueRunner dialogueRunner;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
     }
 
     // Update is called once per frame
@@ -18,7 +21,8 @@ public class SquirrelController : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2d(Collider other){
-        //dialogueSystem.StartDialogue();
+    void OnTriggerEnter2D(Collider2D other){
+        Debug.Log("triggered");
+        dialogueRunner.StartDialogue("First");
     }
 }
