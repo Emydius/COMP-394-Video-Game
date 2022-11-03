@@ -1,6 +1,6 @@
 ﻿title: First
 ---
-Squirrel: Hey, who’s that? Get out of here!
+Squirrel: Hey, who's that? Get out of here!
 
 -> Bug: That's a very rude thing to say to a stranger. Learn some manners!
 	Squirrel: I guess you’re right, my apologies.
@@ -49,9 +49,3 @@ Bug: Okay . . . you're right. I'm actually trying to prove my innocence to the b
 ===
 
 
-title: endOfLevel
----
-Bug: Is there a village over there?
-Squirrel: It's my hometown, Chungusburg. I love it here but I'm an outlaw.
-Squirrel: All because I stabbed a guy for my bleuberry muffin.
-===
