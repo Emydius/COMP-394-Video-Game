@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed; // Allows us to set speed within Unity while keeping it a private variable, for security reasons.
 
+    [SerializeField] private float velocity; // This is so I can see the velocity in real time in the inspector
+
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = transform.GetChild(1).GetComponent<BoxCollider2D>();
         gravity = GetComponent<ConstantForce2D>();
     }
 
@@ -27,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     private void FixedUpdate() {
+        velocity = body.velocity.magnitude;
+
+        // Limits velocity
+        if (body.velocity.magnitude > 7f)
+            body.velocity = body.velocity.normalized * 6;
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         if (horizontalInput > 0.01f)
@@ -36,7 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
         // Only allows movement only if bug is grounded. If in the air, normal downward gravity is applied but if grounded then relative gravity is applied so the bug sticks to the walls.
         if (isGrounded()) {
-            body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0)));
+            body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0))); // This movement uses addforce, meaning it'll "slide" around and have acceleration
+            // body.velocity = (Vector2) transform.right*horizontalInput*speed; // This movement sets velocity directly, meaning movement is snappy & no acceleration, only issue is when grounded there is no gravity, making it float around if close enough to the ground.
             gravity.force = Vector2.zero;
             gravity.relativeForce = new Vector2(0, -9.8f);
             // body.velocity = (Vector2) transform.right*horizontalInput*speed;
@@ -48,8 +56,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && isGrounded()) {
             // body.velocity += (Vector2) transform.up.normalized * speed;
+
             // TODO: Multiply this speed so that as the bug's rotation is farther from 0 the force of the jump is lower (if the bug jumps sideways then gravity isn't acting against it and it flies off into oblivion)
-            body.AddForce(transform.TransformDirection(new Vector2(0, speed, ForceMode2D.Impulse);
+            body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
+
+            // body.velocity = 
             // body.velocity = transform.TransformDirection(new Vector2(body.velocity.x, speed));
             // body.velocity += (Vector2) transform.TransformDirection(new Vector2(0, speed * (transform.rotation.eulerAngles.z != 0 ? 1f/Mathf.Abs(transform.rotation.eulerAngles.z) : 1)));
             
@@ -69,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.up*-1, 1f, groundLayer);
         return raycastHit.collider != null;
     }
 }
