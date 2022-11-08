@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = transform.GetChild(1).GetComponent<BoxCollider2D>();
         gravity = GetComponent<ConstantForce2D>();
     }
 
@@ -65,7 +65,9 @@ public class PlayerMovement : MonoBehaviour
             // body.velocity += (Vector2) transform.up.normalized * speed;
 
             // TODO: Multiply this speed so that as the bug's rotation is farther from 0 the force of the jump is lower (if the bug jumps sideways then gravity isn't acting against it and it flies off into oblivion)
-            body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
+            // body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
+            
+            body.velocity = body.velocity + (Vector2)transform.up*speed;
             jumpSound.Play();
 
             // body.velocity = 
@@ -88,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.01f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
 
