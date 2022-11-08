@@ -97,9 +97,18 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter2D (Collision2D coll){
         if ( coll.collider.CompareTag("Water"))
         {
-        Vector2 nvec= new Vector2(-5f* body.velocity.x, body.velocity.y);//change the acorn and let it collide a bit and fall through
+        speed=speed*0.7f;
+         Invoke("NormalSpeed",10);
         
-        body.velocity = nvec;
+      
         }
+    }
+
+    void NormalSpeed()
+    {
+       
+         speed=speed/0.7f;
+       
+
     }
 }
