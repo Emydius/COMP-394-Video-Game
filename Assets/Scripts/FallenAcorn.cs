@@ -25,13 +25,13 @@ public class FallenAcorn : MonoBehaviour
      
 
     void OnCollisionEnter2D (Collision2D coll){
-        if ( coll.collider.CompareTag("Branch"))
-        {
-        Vector2 nvec= new Vector2(acorn.velocity.x, 5f* acorn.velocity.y);//change the acorn and let it collide a bit and fall through
+        // if ( coll.collider.CompareTag("Branch"))
+        // {
+        // Vector2 nvec= new Vector2(acorn.velocity.x, 5f* acorn.velocity.y);//change the acorn and let it collide a bit and fall through
         
-        acorn.velocity = nvec;
+        // acorn.velocity = nvec;
 
-        }
+        // }
         if( coll.collider.CompareTag("Bug")){
             Destroy( coll.collider.gameObject);
         }
@@ -39,13 +39,13 @@ public class FallenAcorn : MonoBehaviour
 
     }
 
-    void ResetBall()
-    { 
-        Vector2 nvect= new Vector2(0,0);
-        acorn.velocity = nvect;
-        transform.position = Vector2.zero;//?
-        Invoke("LaunchAcorn", 1);
-    }
+    // void ResetBall()
+    // { 
+    //     Vector2 nvect= new Vector2(0,0);
+    //     acorn.velocity = nvect;
+    //     transform.position = Vector2.zero;//?
+    //     Invoke("LaunchAcorn", 1);
+    // }
 
     void LaunchAcorn()
     {
