@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float velocity; // This is so I can see the velocity in real time in the inspector
 
+    [SerializeField] private Sprite groundedBug;
+    [SerializeField] private Sprite bug;
+    
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
@@ -30,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate() {
         velocity = body.velocity.magnitude;
+
+        if (isGrounded()) {
+            GetComponent<SpriteRenderer>().sprite = groundedBug;
+        } else GetComponent<SpriteRenderer>().sprite = bug;
 
         // Limits velocity
         if (body.velocity.magnitude > 7f)
