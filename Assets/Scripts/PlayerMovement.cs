@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;
     private ConstantForce2D gravity;
-
+    public AudioSource jumpSound;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed; // Allows us to set speed within Unity while keeping it a private variable, for security reasons.
 
@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
             // TODO: Multiply this speed so that as the bug's rotation is farther from 0 the force of the jump is lower (if the bug jumps sideways then gravity isn't acting against it and it flies off into oblivion)
             body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
+            jumpSound.Play();
 
             // body.velocity = 
             // body.velocity = transform.TransformDirection(new Vector2(body.velocity.x, speed));

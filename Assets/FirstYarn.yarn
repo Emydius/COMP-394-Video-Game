@@ -38,6 +38,7 @@ Squirrel: It's a deal then! And you're lucky I'm joining you now. You see, I'm a
 Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes that I can count on both paws!
 Bug: Gee…that'd be super! I could work on my agility, that's for sure.
 Squirrel: Happy to help! Alright, here's a bit of the basics…
+<<jump Tutorial>>
 ===
 
 title: Reason2
@@ -48,4 +49,9 @@ Bug: Okay . . . you're right. I'm actually trying to prove my innocence to the b
 <<jump Reason1>>
 ===
 
-
+title: Tutorial
+---
+Squirrel: Hold down the Z key to dash.
+Squirrel: If you're dashing, you can run through sticky sap or break through the wind.
+Squirrel: I try dashing in every part of my day. You never know what you might discover if you dash!
+===
