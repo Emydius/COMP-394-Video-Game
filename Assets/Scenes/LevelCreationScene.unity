@@ -2237,6 +2237,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5916935883551073144, guid: ab63a74ea8dd443a2976430a5f212298, type: 3}
+      propertyPath: bug
+      value: 
+      objectReference: {fileID: 21300000, guid: 12ebd7b9e480cb24899e8dd5bf5c3eae, type: 3}
+    - target: {fileID: 5916935883551073144, guid: ab63a74ea8dd443a2976430a5f212298, type: 3}
       propertyPath: speed
       value: 7
       objectReference: {fileID: 0}
@@ -2244,6 +2248,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5916935883551073144, guid: ab63a74ea8dd443a2976430a5f212298, type: 3}
+      propertyPath: groundedBug
+      value: 
+      objectReference: {fileID: 21300000, guid: eb830b813d692ad4eab6fe54602a48f2, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5916935883551073143, guid: ab63a74ea8dd443a2976430a5f212298, type: 3}

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-        boxCollider = transform.GetChild(1).GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         gravity = GetComponent<ConstantForce2D>();
     }
 
@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.up*-1, 1f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
 
