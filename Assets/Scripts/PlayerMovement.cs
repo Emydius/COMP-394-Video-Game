@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float velocity; // This is so I can see the velocity in real time in the inspector
 
+    [SerializeField] private Sprite groundedBug;
+    [SerializeField] private Sprite bug;
+    
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
@@ -30,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate() {
         velocity = body.velocity.magnitude;
+
+        if (isGrounded()) {
+            GetComponent<SpriteRenderer>().sprite = groundedBug;
+        } else GetComponent<SpriteRenderer>().sprite = bug;
 
         // Limits velocity
         if (body.velocity.magnitude > 7f)
@@ -83,5 +90,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded() {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.up*-1, 1f, groundLayer);
         return raycastHit.collider != null;
+    }
+
+    void OnCollisionEnter2D (Collision2D coll){
+        if ( coll.collider.CompareTag("Water"))
+        {
+        Vector2 nvec= new Vector2(-5f* body.velocity.x, body.velocity.y);//change the acorn and let it collide a bit and fall through
+        
+        body.velocity = nvec;
+        }
     }
 }
