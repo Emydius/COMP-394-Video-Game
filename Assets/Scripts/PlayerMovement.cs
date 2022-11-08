@@ -97,5 +97,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 nvec= new Vector2(-5f* body.velocity.x, body.velocity.y);//change the acorn and let it collide a bit and fall through
         
         body.velocity = nvec;
+        }
     }
 }
