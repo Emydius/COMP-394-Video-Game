@@ -90,4 +90,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.up*-1, 1f, groundLayer);
         return raycastHit.collider != null;
     }
+
+    void OnCollisionEnter2D (Collision2D coll){
+        if ( coll.collider.CompareTag("Water"))
+        {
+        Vector2 nvec= new Vector2(-5f* body.velocity.x, body.velocity.y);//change the acorn and let it collide a bit and fall through
+        
+        body.velocity = nvec;
+    }
 }

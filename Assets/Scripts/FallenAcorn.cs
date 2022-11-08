@@ -27,7 +27,8 @@ public class FallenAcorn : MonoBehaviour
     void OnCollisionEnter2D (Collision2D coll){
         if ( coll.collider.CompareTag("Branch"))
         {
-        Vector2 nvec= new Vector2(acorn.velocity.x, 0.5f* acorn.velocity.y+0.5f*coll.collider.attachedRigidbody.velocity.y);
+        Vector2 nvec= new Vector2(acorn.velocity.x, 5f* acorn.velocity.y);//change the acorn and let it collide a bit and fall through
+        
         acorn.velocity = nvec;
 
         }
