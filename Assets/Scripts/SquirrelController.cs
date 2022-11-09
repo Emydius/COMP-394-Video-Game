@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class SquirrelController : MonoBehaviour
 { 
     private DialogueRunner dialogueRunner;
-    public UnityEvent dialogueEvent;
+    //public UnityEvent dialogueEvent; See comment below
     
 
     // Start is called before the first frame update
@@ -25,7 +25,9 @@ public class SquirrelController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         Debug.Log("triggered");
         dialogueRunner.StartDialogue("First");
-        dialogueEvent.Invoke();
+        //dialogueEvent.Invoke(); 
+        //Eventually, this event can be hooked up to a method freezing the player's movement until the
+        //dialogue has finished.
 
     }
 }
