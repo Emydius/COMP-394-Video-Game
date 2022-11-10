@@ -49,8 +49,9 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-3, 3, 3);
 
         // Only allows movement only if bug is grounded. If in the air, normal downward gravity is applied but if grounded then relative gravity is applied so the bug sticks to the walls.
+        body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0))); // This movement uses addforce, meaning it'll "slide" around and have acceleration
+
         if (isGrounded()) {
-            body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0))); // This movement uses addforce, meaning it'll "slide" around and have acceleration
             // body.velocity = (Vector2) transform.right*horizontalInput*speed; // This movement sets velocity directly, meaning movement is snappy & no acceleration, only issue is when grounded there is no gravity, making it float around if close enough to the ground.
             gravity.force = Vector2.zero;
             gravity.relativeForce = new Vector2(0, -9.8f);
@@ -59,6 +60,22 @@ public class PlayerMovement : MonoBehaviour
         else {
             gravity.relativeForce = Vector2.zero;
             gravity.force = new Vector2(0, -9.8f);
+            
+            // Helps rotate the player upright mid-air if it has rotated unsafely (turn off if glitchy)
+            if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
+                // transform.rotation = Quaternion.RotateTowards(transform.rotation,)
+                transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.05f, transform.rotation.w);
+            }
+
+
+            // if (transform.rotation.eulerAngles.z > 30 && transform.rotation.eulerAngles.z < 180) {
+            //     Debug.Log("Rotation Detected");
+            //     transform.Rotate(0, 0, -20f);
+            // } 
+            // else if (transform.rotation.eulerAngles.z < 330 && transform.rotation.eulerAngles.z >= 180) {
+            //     transform.Rotate(0, 0, 20f);
+            // }
+            
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded()) {
@@ -91,6 +108,12 @@ public class PlayerMovement : MonoBehaviour
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
+        return raycastHit.collider != null;
+    }
+
+    private bool isFlipped() {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.up), 0.1f, groundLayer);
+        if (raycastHit.collider != null) {}
         return raycastHit.collider != null;
     }
 
