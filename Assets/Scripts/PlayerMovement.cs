@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private ConstantForce2D gravity;
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
-    private float flipTimer = 3;
+    private float flipTimer = 1;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed; // Allows us to set speed within Unity while keeping it a private variable, for security reasons.
 
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             // Helps rotate the player upright mid-air if it has rotated unsafely (turn off if glitchy)
             if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
                 // transform.rotation = Quaternion.RotateTowards(transform.rotation,)
-                transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.05f, transform.rotation.w);
+                transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.1f, transform.rotation.w);
             }
             if (isFlipped()) {
                 GetComponent<SpriteRenderer>().sprite = flippedBug;
@@ -134,13 +134,13 @@ public class PlayerMovement : MonoBehaviour
         } else {
             if (potentiallyFlipped) {
                 potentiallyFlipped = false;
-                flipTimer = 3;
+                flipTimer = 1;
             } 
         }
 
         if (flipTimer <= 0) {
             transform.Rotate(0, 0, 180);
-            flipTimer = 3;
+            flipTimer = 1;
             potentiallyFlipped = false;
         }
 
