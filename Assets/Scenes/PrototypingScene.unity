@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 265439283}
   m_Layer: 0
   m_Name: GroundLayer
-  m_TagString: Untagged
+  m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1214,7 +1214,7 @@ GameObject:
   - component: {fileID: 1090597048}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,10 +1345,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eb0d9ef08fffe94fb719fb2c553e5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSound: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   speed: 7
+  velocity: 0
+  groundedBug: {fileID: 0}
+  bug: {fileID: 0}
 --- !u!1 &1287199168
 GameObject:
   m_ObjectHideFlags: 0

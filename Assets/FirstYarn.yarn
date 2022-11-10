@@ -2,20 +2,18 @@
 ---
 Squirrel: Hey, who's that? Get out of here!
 
--> Bug: That's a very rude thing to say to a stranger. Learn some manners!
+-> Bug: That's a rude way to greet someone. What did I ever do you to you?
 	Squirrel: I guess you’re right, my apologies.
 -> Bug: Sorry, I’ll get out of your way!
 	Squirrel: Don't be so considerate! Show some backbone, you exoskeletal creature!
 
 Bug: Well, it seems like you're looking for something. Did you lose anything?
-Squirrel: Yeah, I've lost my blueberry muffin. I've searched high and low but still, nothing.
-Bug: You lost your blueberry muffin? 
-Bug: Couldn't you just cook some more?
-Squirrel: It's not that simple!
-Squirrel: There's only one blueberry muffin in the world that's good enough for my tastebuds! It's the kind that my Grandma Squirrel makes!
+Squirrel: Yeah, I've lost my blueberry muffin. I've searched high and low but still, nothing. If you find it, you'd better not run off with it!
+Bug: You lost a muffin? Couldn't you just bake more?
+Squirrel: It's not that simple! There's only one blueberry muffin in the world that's good enough for my tastebuds! The kind that my Grandma Squirrel made before her timely demise of natural causes!
 Bug: (Wonder how many Grandma Squirrels there are in this tree…)
 Squirrel: Wait, you're distracting me! I still don't know what a bug like you is doing this high up in the tree!
-->Bug: I'm on a journey to prove my innocence to the birds.
+->Bug: I'm on my way to prove my innocence to the birds.
     <<jump Reason1>>
 ->Bug: I'm on a sightseeing tour!
 	Squirrel: I don't believe that for a second.
@@ -24,35 +22,36 @@ Squirrel: Wait, you're distracting me! I still don't know what a bug like you is
 
 title: Reason1
 ---
-Squirrel: The birds, you say?
-Squirrel: That's an admirable goal, and certainly more important than my blueberry muffin.
+Squirrel: The birds, you say? That's an admirable goal, and certainly more important than my blueberry muffin. Sounds like a fun trunk trip too.
 Bug: (He's changing his mind that quickly…?)
-Squirrel: Plus, I can search for my blueberry muffin any old time. I've got nothing but time!
-Squirrel: But you, this mission of yours is pressing! You're running out of time!
-Bug: I haven't even told you anything about my crime yet. 
+Squirrel: It sure would be fun to come along with you on a quest to the Canopy.
+Squirrel: Plus, I can search for my blueberry muffin whenever I want. I've got nothing but time!
+Squirrel: But you, this mission of yours seems pressing! You probably want to get there as soon as possible to clear your name of the horrible accusations!
+Bug: I haven't even told you anything about my crimes yet. 
 Squirrel: Oh, I know. But there's something about your eyes that tells me everything I need to know about you.
-Squirrel: Their intensity…their drive…why, I could sense your resolve from a mile away!
-Squirrel: I've made up my mind. I'm coming with you!
+Squirrel: Their intensity…their drive…now that I take a close look, I see you're actually a really trustworthy fellow!
+Bug: How can you say that after we've barely had a conversation? Weren't you just yelling at me to go away a couple dialogue boxes ago?
+Squirrel: That may be so, but you've just got this aura about you...the longer I'm in your presence, the more I'm convinced...
+Squirrel: I've made up my mind. I'm coming with you! You'll need my help.
 Bug: Well, I certainly won't refuse…
 Squirrel: It's a deal then! And you're lucky I'm joining you now. You see, I'm a pretty fast runner if I do say so myself.
-Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes that I can count on both paws!
+Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes than I can count on both paws!
 Bug: Gee…that'd be super! I could work on my agility, that's for sure.
-Squirrel: Happy to help! Alright, here's a bit of the basics…
+Squirrel: Happy to help! Alright, let me walk you through the basics…
 <<jump Tutorial>>
 ===
 
 title: Reason2
 ---
-Bug: You know . . . I just really want to see what this tree has to offer.
+Bug: No, no, it's true . . . I just really want to see what this tree has to offer.
 Squirrel: I still don't believe you. A little bug like you would never try to scale the tree, not with the birds always prowling around!
-Bug: Okay . . . you're right. I'm actually trying to prove my innocence to the birds.
+Bug: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my innocence to the birds.
 <<jump Reason1>>
 ===
 
 title: Tutorial
 ---
-Squirrel: Hold down the Z key to dash.
-Squirrel: If you're dashing, you can run through sticky sap or break through the wind.
+Squirrel: Hold down the Z key to dash. If you're dashing, you can run through sticky sap or on top of water. 
 Squirrel: I try dashing in every part of my day. You never know what you might discover if you dash!
 ===
 
@@ -60,22 +59,18 @@ title: EndofLevel
 tags:
 ---
 Bug: Is that a village over there?
-Squirrel: It's my hometown. I love it here but I'm an outlaw.
-Squirrel: They kicked me out because the bird Queen wanted a bite of my muffin.
+Squirrel: It's my hometown. Acropolis. Greatest squirrel settlement this side of the Great Tree's Trunk.
+Squirrel: They kicked me out because the bird queen wanted a bite of my muffin.
 Squirrel: I wouldn't let her have it, of course. It was my Grandma Squirrel's last gift to me!
-Bug: That's awful that the Queen would do that to you. You know, they did me wrong too.
-Bug: I also got exiled from my home. They accused me of stealing an egg.
-Bug: What would I ever want with an egg?
-Bug: And then they ravaged my town. I wanted to help rebuild but Chief Arachna said I was "banished".
-Squirrel: Well, that's something we have in common! 
-Squirrel: Hey, I just thought of something! We both have bones to pick with the birdbrains.
-Squirrel: What if I try to prove MY innocence too?
-Bug: Sure, you've already been so helpful. The least I could do is get you a reward too.
-Squirrel: Huh, you're right. I've been so charitable and didn't expect anything in return!
-Squirrel: Well, I'm looking forward to clearing my name! 
-Squirrel: So, are you a lawyer or something?
-Bug:....
-Bug:............
-Bug: Yeah, I've defended hundreds of bug clients! This'll be a piece of cake!
-Squirrel: Oh cool. I'm in good hands, then. Wait, do you have hands?
+Squirrel: So, she declared me a threat to the throne and ordered my dismissal from here. If I show my face I'll be chased out with sharpened claws!
+Bug: That's awful that the queen would do that to you. I'd heard stories of the birds' atrocities, but now that I've experienced them firsthand, I really get it.
+Bug: I also got exiled from my home. They accused me of stealing an egg from one of their nests. So they burnt my village to the ground.
+Bug: I wanted to help rebuild but Chief Arachna said I was "banished".
+Bug: And all because of a stupid egg. What would I ever want with an egg? It's not like I could eat it with a live bird inside.
+Squirrel: Well hey, what are the odds that us two outcasts would find each other? Seems like destiny wove our paths together.
+Squirrel: Hey, I just thought of something! We both have bones to pick with the birdbrains. What if, when you're visiting the birds, I petition for my freedom too?
+Bug: I'm not gonna stop you from getting a reward there too. Plus, you've been so helpful with your dashing lessons.
+Squirrel: Huh, you're right. I've been so charitable and didn't expect anything in return! Well, I'm looking forward to it--when I'm through with those birdbrains, they'll HAVE to let me back home!
+Squirrel: But that time hasn't come yet. Come on, let's keep moving before they spot my furry outlawed face.
+
 ===
