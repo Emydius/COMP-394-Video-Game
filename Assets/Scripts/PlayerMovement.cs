@@ -6,9 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Rigidbody2D body;
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D groundCollider;
+    private BoxCollider2D ceilingCollider;
     private ConstantForce2D gravity;
     public AudioSource jumpSound;
+    private bool potentiallyFlipped;
+    private float flipTimer = 3;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed; // Allows us to set speed within Unity while keeping it a private variable, for security reasons.
 
@@ -16,11 +19,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Sprite groundedBug;
     [SerializeField] private Sprite bug;
+    [SerializeField] private Sprite flippedBug;
     
     // Awake is called even if the script is disabled.
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-        boxCollider = transform.GetChild(1).GetComponent<BoxCollider2D>();
+        groundCollider = transform.GetChild(1).GetComponent<BoxCollider2D>();
+        ceilingCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
         gravity = GetComponent<ConstantForce2D>();
     }
 
@@ -34,11 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate() {
         velocity = body.velocity.magnitude;
 
-        if (isGrounded()) {
-            GetComponent<SpriteRenderer>().sprite = groundedBug;
-        } else GetComponent<SpriteRenderer>().sprite = bug;
-
-        // Limits velocity
+        // Limits velocity (while jumping at an angle the bug might accidentally reach unsafe velocities)
         if (body.velocity.magnitude > 7f)
             body.velocity = body.velocity.normalized * 6;
 
@@ -52,12 +53,16 @@ public class PlayerMovement : MonoBehaviour
         body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0))); // This movement uses addforce, meaning it'll "slide" around and have acceleration
 
         if (isGrounded()) {
+            GetComponent<SpriteRenderer>().sprite = groundedBug;
+            
             // body.velocity = (Vector2) transform.right*horizontalInput*speed; // This movement sets velocity directly, meaning movement is snappy & no acceleration, only issue is when grounded there is no gravity, making it float around if close enough to the ground.
             gravity.force = Vector2.zero;
             gravity.relativeForce = new Vector2(0, -9.8f);
             // body.velocity = (Vector2) transform.right*horizontalInput*speed;
         }
         else {
+            
+            GetComponent<SpriteRenderer>().sprite = bug;
             gravity.relativeForce = Vector2.zero;
             gravity.force = new Vector2(0, -9.8f);
             
@@ -66,7 +71,9 @@ public class PlayerMovement : MonoBehaviour
                 // transform.rotation = Quaternion.RotateTowards(transform.rotation,)
                 transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.05f, transform.rotation.w);
             }
-
+            if (isFlipped()) {
+                GetComponent<SpriteRenderer>().sprite = flippedBug;
+            }
 
             // if (transform.rotation.eulerAngles.z > 30 && transform.rotation.eulerAngles.z < 180) {
             //     Debug.Log("Rotation Detected");
@@ -107,13 +114,36 @@ public class PlayerMovement : MonoBehaviour
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(groundCollider.bounds.center, groundCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
 
+    // Checks if bug's back is touching ground, runs a timer for 3 seconds and if continuously flipped over for 3 seconds it negates the bug's Z rotation
+    // I think we should play test this with and without the flip detection later on. I feel like the bug flipping mid air is good enough, and this seems like a lot of computing, but there's always the what if the player manages to flip so I don't know.
     private bool isFlipped() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, transform.TransformDirection(Vector2.up), 0.1f, groundLayer);
-        if (raycastHit.collider != null) {}
+
+        RaycastHit2D raycastHit = Physics2D.BoxCast(ceilingCollider.bounds.center, ceilingCollider.bounds.size, 0, transform.TransformDirection(Vector2.up), 0.1f, groundLayer);
+        
+        // Runs timer if bug's back is touching ground, otherwise resets timer
+        if (raycastHit.collider != null) {
+            if (potentiallyFlipped) {
+                flipTimer -= Time.deltaTime;
+            } else {
+                potentiallyFlipped = true;
+            }
+        } else {
+            if (potentiallyFlipped) {
+                potentiallyFlipped = false;
+                flipTimer = 3;
+            } 
+        }
+
+        if (flipTimer <= 0) {
+            transform.Rotate(0, 0, 180);
+            flipTimer = 300;
+            potentiallyFlipped = false;
+        }
+
         return raycastHit.collider != null;
     }
 
