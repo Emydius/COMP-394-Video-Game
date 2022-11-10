@@ -40,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
         velocity = body.velocity.magnitude;
 
         // Limits velocity (while jumping at an angle the bug might accidentally reach unsafe velocities)
-        if (body.velocity.magnitude > 7f)
-            body.velocity = body.velocity.normalized * 6;
+        if (body.velocity.magnitude > 10f)
+            body.velocity = body.velocity.normalized * 10;
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         if (horizontalInput > 0.01f)
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             // TODO: Multiply this speed so that as the bug's rotation is farther from 0 the force of the jump is lower (if the bug jumps sideways then gravity isn't acting against it and it flies off into oblivion)
             // body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
             
-            body.velocity = body.velocity + (Vector2)transform.up*speed;
+            body.velocity = body.velocity + (Vector2)transform.up*speed*0.3f;
             jumpSound.Play();
 
             // body.velocity = 
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (flipTimer <= 0) {
             transform.Rotate(0, 0, 180);
-            flipTimer = 300;
+            flipTimer = 3;
             potentiallyFlipped = false;
         }
 
