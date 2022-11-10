@@ -9,9 +9,6 @@ Squirrel: Hey, who's that? Get out of here!
 
 Bug: Well, it seems like you're looking for something. Did you lose anything?
 Squirrel: Yeah, I've lost my blueberry muffin. I've searched high and low but still, nothing. If you find it, you'd better not run off with it!
-Bug: You lost a muffin? Couldn't you just bake more?
-Squirrel: It's not that simple! There's only one blueberry muffin in the world that's good enough for my tastebuds! The kind that my Grandma Squirrel made before her timely demise of natural causes!
-Bug: (Wonder how many Grandma Squirrels there are in this tree…)
 Squirrel: Wait, you're distracting me! I still don't know what a bug like you is doing this high up in the tree!
 ->Bug: I'm on my way to prove my innocence to the birds.
     <<jump Reason1>>
@@ -25,16 +22,11 @@ title: Reason1
 Squirrel: The birds, you say? That's an admirable goal, and certainly more important than my blueberry muffin. Sounds like a fun trunk trip too.
 Bug: (He's changing his mind that quickly…?)
 Squirrel: It sure would be fun to come along with you on a quest to the Canopy.
-Squirrel: Plus, I can search for my blueberry muffin whenever I want. I've got nothing but time!
-Squirrel: But you, this mission of yours seems pressing! You probably want to get there as soon as possible to clear your name of the horrible accusations!
-Bug: I haven't even told you anything about my crimes yet. 
-Squirrel: Oh, I know. But there's something about your eyes that tells me everything I need to know about you.
-Squirrel: Their intensity…their drive…now that I take a close look, I see you're actually a really trustworthy fellow!
-Bug: How can you say that after we've barely had a conversation? Weren't you just yelling at me to go away a couple dialogue boxes ago?
+Squirrel: There's something about your eyes that tells me everything I need to know about you.
+Squirrel: Their intensity…their drive…now that I take a closer look, I see you're actually a really trustworthy fellow!
+Bug: We've barely spoken for 2 minutes. Weren't you just yelling at me to go away a couple dialogue boxes ago?
 Squirrel: That may be so, but you've just got this aura about you...the longer I'm in your presence, the more I'm convinced...
-Squirrel: I've made up my mind. I'm coming with you! You'll need my help.
-Bug: Well, I certainly won't refuse…
-Squirrel: It's a deal then! And you're lucky I'm joining you now. You see, I'm a pretty fast runner if I do say so myself.
+Squirrel: I've made up my mind. I'm coming with you! You'll need my help. 
 Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes than I can count on both paws!
 Bug: Gee…that'd be super! I could work on my agility, that's for sure.
 Squirrel: Happy to help! Alright, let me walk you through the basics…
