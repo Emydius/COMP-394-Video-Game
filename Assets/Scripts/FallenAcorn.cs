@@ -8,18 +8,19 @@ public class FallenAcorn : MonoBehaviour
      
     Rigidbody2D acorn;
     public int timetoStart;
+    float speed=5f;
     
     // Start is called before the first frame update
     void Start()
     {
-      acorn = GetComponent<Rigidbody2D>();
+      //acorn = GetComponent<Rigidbody2D>();
      Invoke("LaunchAcorn", timetoStart);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position-= new Vector3(0,speed*Time.deltaTime);
     }
 
      
@@ -39,13 +40,6 @@ public class FallenAcorn : MonoBehaviour
 
     }
 
-    // void ResetBall()
-    // { 
-    //     Vector2 nvect= new Vector2(0,0);
-    //     acorn.velocity = nvect;
-    //     transform.position = Vector2.zero;//?
-    //     Invoke("LaunchAcorn", 1);
-    // }
 
     void LaunchAcorn()
     {
