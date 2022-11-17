@@ -164,4 +164,9 @@ public class PlayerMovement : MonoBehaviour
        
 
     }
+
+    public void ResetPlayer(){
+        Vector2 resetPosition = new Vector2(-6.0f, -3.0f); 
+        body.transform.position = resetPosition;
+    }
 }
