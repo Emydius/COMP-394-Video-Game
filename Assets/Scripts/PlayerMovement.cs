@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D groundCollider;
     private BoxCollider2D ceilingCollider;
     private ConstantForce2D gravity;
+    [SerializeField] private float gravConstant = -9.8f;
+    private float jumpBuffer = 0.3f;
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
     private float flipTimer = 1;
@@ -40,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
         velocity = body.velocity.magnitude;
 
         // Limits velocity (while jumping at an angle the bug might accidentally reach unsafe velocities)
-        if (body.velocity.magnitude > 10f)
-            body.velocity = body.velocity.normalized * 10;
+        // if (body.velocity.magnitude > 10f)
+        //     body.velocity = body.velocity.normalized * 10;
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         if (horizontalInput > 0.01f)
@@ -49,22 +51,32 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.01f)
             transform.localScale = new Vector3(-3, 3, 3);
 
-        // Only allows movement only if bug is grounded. If in the air, normal downward gravity is applied but if grounded then relative gravity is applied so the bug sticks to the walls.
-        body.AddForce(transform.TransformDirection(new Vector2(horizontalInput*speed, 0))); // This movement uses addforce, meaning it'll "slide" around and have acceleration
+        // This actually moves the character, exerting a force left or right of the character depending on horizontal input.
+        body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
+
 
         if (isGrounded()) {
             GetComponent<SpriteRenderer>().sprite = groundedBug;
             
-            // body.velocity = (Vector2) transform.right*horizontalInput*speed; // This movement sets velocity directly, meaning movement is snappy & no acceleration, only issue is when grounded there is no gravity, making it float around if close enough to the ground.
             gravity.force = Vector2.zero;
-            gravity.relativeForce = new Vector2(0, -9.8f);
-            // body.velocity = (Vector2) transform.right*horizontalInput*speed;
+            gravity.relativeForce = new Vector2(0, gravConstant);
+
+            if (jumpBuffer > 0) {
+                jumpBuffer -= Time.deltaTime;
+            } else {
+                if (Input.GetKey(KeyCode.Space)) {
+                    // body.velocity = body.velocity + (Vector2)transform.up*speed*0.3f;
+                    body.AddRelativeForce(new Vector2(0, 6f), ForceMode2D.Impulse);
+                    jumpSound.Play();
+                    jumpBuffer = 0.3f;
+                }
+            }
         }
         else {
-            
+            jumpBuffer = 0.3f;
             GetComponent<SpriteRenderer>().sprite = bug;
             gravity.relativeForce = Vector2.zero;
-            gravity.force = new Vector2(0, -9.8f);
+            gravity.force = new Vector2(0, gravConstant);
             
             // Helps rotate the player upright mid-air if it has rotated unsafely (turn off if glitchy)
             if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
@@ -74,47 +86,13 @@ public class PlayerMovement : MonoBehaviour
             if (isFlipped()) {
                 GetComponent<SpriteRenderer>().sprite = flippedBug;
             }
-
-            // if (transform.rotation.eulerAngles.z > 30 && transform.rotation.eulerAngles.z < 180) {
-            //     Debug.Log("Rotation Detected");
-            //     transform.Rotate(0, 0, -20f);
-            // } 
-            // else if (transform.rotation.eulerAngles.z < 330 && transform.rotation.eulerAngles.z >= 180) {
-            //     transform.Rotate(0, 0, 20f);
-            // }
             
         }
-
-        if (Input.GetKey(KeyCode.Space) && isGrounded()) {
-            // body.velocity += (Vector2) transform.up.normalized * speed;
-
-            // TODO: Multiply this speed so that as the bug's rotation is farther from 0 the force of the jump is lower (if the bug jumps sideways then gravity isn't acting against it and it flies off into oblivion)
-            // body.AddForce(transform.TransformDirection(new Vector2(0, 1)), ForceMode2D.Impulse); 
-            
-            body.velocity = body.velocity + (Vector2)transform.up*speed*0.3f;
-            jumpSound.Play();
-
-            // body.velocity = 
-            // body.velocity = transform.TransformDirection(new Vector2(body.velocity.x, speed));
-            // body.velocity += (Vector2) transform.TransformDirection(new Vector2(0, speed * (transform.rotation.eulerAngles.z != 0 ? 1f/Mathf.Abs(transform.rotation.eulerAngles.z) : 1)));
-            
-        }
-
-        // Helps rotate the player upright mid-air if it is rotating unsafely (off for now)
-        // if (!isGrounded()) {
-        //     if (transform.rotation.eulerAngles.z > 30 && transform.rotation.eulerAngles.z < 180) {
-        //         Debug.Log("Rotation Detected");
-        //         transform.Rotate(0, 0, -20f);
-        //     } 
-        //     else if (transform.rotation.eulerAngles.z < 330 && transform.rotation.eulerAngles.z >= 180) {
-        //         transform.Rotate(0, 0, 20f);
-        //     }
-        // }
     }
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(groundCollider.bounds.center, groundCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(groundCollider.bounds.center, groundCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.5f, groundLayer);
         return raycastHit.collider != null;
     }
 
