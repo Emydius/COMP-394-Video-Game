@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
         velocity = body.velocity.magnitude;
 
         // Limits velocity (while jumping at an angle the bug might accidentally reach unsafe velocities)
-        // if (body.velocity.magnitude > 10f)
-        //     body.velocity = body.velocity.normalized * 10;
+        if (body.velocity.magnitude > 10f)
+            body.velocity = body.velocity.normalized * 10;
 
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         if (horizontalInput > 0.01f)
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-3, 3, 3);
 
         // This actually moves the character, exerting a force left or right of the character depending on horizontal input.
-        body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
+
 
 
         if (isGrounded()) {
@@ -60,13 +60,13 @@ public class PlayerMovement : MonoBehaviour
             
             gravity.force = Vector2.zero;
             gravity.relativeForce = new Vector2(0, gravConstant);
-
+            body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
             if (jumpBuffer > 0) {
                 jumpBuffer -= Time.deltaTime;
             } else {
                 if (Input.GetKey(KeyCode.Space)) {
                     // body.velocity = body.velocity + (Vector2)transform.up*speed*0.3f;
-                    body.AddRelativeForce(new Vector2(0, 6f), ForceMode2D.Impulse);
+                    body.AddRelativeForce(new Vector2(0, 10f), ForceMode2D.Impulse);
                     jumpSound.Play();
                     jumpBuffer = 0.3f;
                 }
@@ -86,13 +86,17 @@ public class PlayerMovement : MonoBehaviour
             if (isFlipped()) {
                 GetComponent<SpriteRenderer>().sprite = flippedBug;
             }
+            else {
+                // If bug is flipped, no movement
+                body.AddForce(new Vector2(horizontalInput*speed, 0));
+            }
             
         }
     }
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(groundCollider.bounds.center, groundCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.5f, groundLayer);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(groundCollider.bounds.center, groundCollider.bounds.size, 0, transform.TransformDirection(Vector2.down), 0.1f, groundLayer);
         return raycastHit.collider != null;
     }
 
