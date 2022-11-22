@@ -9,6 +9,7 @@ public class FallenAcorn : MonoBehaviour
     Rigidbody2D acorn;
     public int timetoStart;
     float speed=5f;
+    public UnityEvent playerHit;
     
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class FallenAcorn : MonoBehaviour
 
      
 
-    void OnCollisionEnter2D (Collision2D coll){
+    void OnTriggerEnter2D (Collider2D coll){
         // if ( coll.collider.CompareTag("Branch"))
         // {
         // Vector2 nvec= new Vector2(acorn.velocity.x, 5f* acorn.velocity.y);//change the acorn and let it collide a bit and fall through
@@ -33,19 +34,14 @@ public class FallenAcorn : MonoBehaviour
         // acorn.velocity = nvec;
 
         // }
-        if( coll.collider.CompareTag("Bug")){
-            Destroy( coll.collider.gameObject);
+        if( coll.CompareTag("Bug")){
+            playerHit.Invoke();
         }
-        
-
     }
 
 
     void LaunchAcorn()
-    {
-       
-            acorn.gravityScale=1;
-       
-
+    { 
+        acorn.gravityScale=1;
     }
 }
