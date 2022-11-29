@@ -4185,6 +4185,10 @@ PrefabInstance:
       propertyPath: deathZoneEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1089884184}
+    - target: {fileID: 363844816778761259, guid: c520c9042a0e94f4a9891c790d4d4f8f, type: 3}
+      propertyPath: deathZoneEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 363844816778761260, guid: c520c9042a0e94f4a9891c790d4d4f8f, type: 3}
       propertyPath: m_RootOrder
       value: -1
