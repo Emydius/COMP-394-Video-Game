@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Sprite groundedBug;
     [SerializeField] private Sprite bug;
     [SerializeField] private Sprite flippedBug;
+
+    private bool frozen = false;
     
     // Awake is called even if the script is disabled.
     private void Awake() {
@@ -34,74 +36,74 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     private void FixedUpdate() {
-        velocity = body.velocity.magnitude;
+        if(!frozen){
+            velocity = body.velocity.magnitude;
+            // Limits velocity (we require a big force to accelerate the bug quickly, but don't want it to actually go that fast)
+            if (body.velocity.magnitude > 10f)
+                body.velocity = body.velocity.normalized * 10;
 
-        // Limits velocity (we require a big force to accelerate the bug quickly, but don't want it to actually go that fast)
-        if (body.velocity.magnitude > 10f)
-            body.velocity = body.velocity.normalized * 10;
+            // Saves the current horizontal input to call it more easily
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // Saves the current horizontal input to call it more easily
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        // Flips sprite depending on direction
-        if (horizontalInput > 0.01f)
-            transform.localScale = new Vector3(3, 3, 3);
-        else if (horizontalInput < -0.01f)
-            transform.localScale = new Vector3(-3, 3, 3);
-
-
-        if (isGrounded()) {
-            // Purple bug if grounded; debugging to see if bug grounds properly
-            GetComponent<SpriteRenderer>().sprite = groundedBug;
-
-            // If bug is grounded, regular gravity turns off and relative gravity turns on to make it stick to surfaces
-            gravity.force = Vector2.zero;
-            gravity.relativeForce = new Vector2(0, gravConstant);
-
-            // Actually moves character relative to its orientation, if grounded
-            body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
+            // Flips sprite depending on direction
+            if (horizontalInput > 0.01f)
+                transform.localScale = new Vector3(3, 3, 3);
+            else if (horizontalInput < -0.01f)
+                transform.localScale = new Vector3(-3, 3, 3);
 
 
-            if (jumpBuffer > 0) {
-                // When grounded, starts a timer counting down before character is able to jump again
-                jumpBuffer -= Time.deltaTime;
-            } else {
-                // Use space to jump by adding an impulse upward, reset jump buffer timer if jumping
-                if (Input.GetKey(KeyCode.Space)) {
-                    body.AddRelativeForce(new Vector2(0, 10f), ForceMode2D.Impulse);
-                    jumpSound.Play();
-                    jumpBuffer = 0.3f;
+            if (isGrounded()) {
+                // Purple bug if grounded; debugging to see if bug grounds properly
+                GetComponent<SpriteRenderer>().sprite = groundedBug;
+
+                // If bug is grounded, regular gravity turns off and relative gravity turns on to make it stick to surfaces
+                gravity.force = Vector2.zero;
+                gravity.relativeForce = new Vector2(0, gravConstant);
+
+                // Actually moves character relative to its orientation, if grounded
+                body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
+
+
+                if (jumpBuffer > 0) {
+                    // When grounded, starts a timer counting down before character is able to jump again
+                    jumpBuffer -= Time.deltaTime;
+                } else {
+                    // Use space to jump by adding an impulse upward, reset jump buffer timer if jumping
+                    if (Input.GetKey(KeyCode.Space)) {
+                        body.AddRelativeForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+                        jumpSound.Play();
+                        jumpBuffer = 0.3f;
+                    }
                 }
             }
-        }
-        else {
-
-            jumpBuffer = 0.3f;
-            // Brown if mid air; debugging
-            GetComponent<SpriteRenderer>().sprite = bug;
-
-            // If bug isn't grounded, regular gravity is applied to make it fall
-            gravity.relativeForce = Vector2.zero;
-            gravity.force = new Vector2(0, gravConstant);
-            
-            // Helps rotate the player upright mid-air if it has rotated unsafely, curved to be smooth
-            if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
-                transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.1f, transform.rotation.w);
-            }
-            // If bug is on it backs, starts a timer to flip and also makes it green for debugging purposes
-            if (isFlipped()) {
-                GetComponent<SpriteRenderer>().sprite = flippedBug;
-            }
             else {
-                // This actually makes the bug move; only executes if bug isn't flipped
-                body.AddForce(new Vector2(horizontalInput*speed, 0));
+
+                jumpBuffer = 0.3f;
+                // Brown if mid air; debugging
+                GetComponent<SpriteRenderer>().sprite = bug;
+
+                // If bug isn't grounded, regular gravity is applied to make it fall
+                gravity.relativeForce = Vector2.zero;
+                gravity.force = new Vector2(0, gravConstant);
+                
+                // Helps rotate the player upright mid-air if it has rotated unsafely, curved to be smooth
+                if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
+                    transform.rotation = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z/1.1f, transform.rotation.w);
+                }
+                // If bug is on it backs, starts a timer to flip and also makes it green for debugging purposes
+                if (isFlipped()) {
+                    GetComponent<SpriteRenderer>().sprite = flippedBug;
+                }
+                else {
+                    // This actually makes the bug move; only executes if bug isn't flipped
+                    body.AddForce(new Vector2(horizontalInput*speed, 0));
+                }
             }
-            
         }
     }
 
@@ -165,5 +167,13 @@ public class PlayerMovement : MonoBehaviour
     public void ResetPlayer(){
         Vector2 resetPosition = new Vector2(-660f, 264f); 
         body.transform.position = resetPosition;
+    }
+
+    public void FreezePlayer (){
+        frozen = true;
+    }
+
+    public void UnfreezePlayer(){
+        frozen = false;
     }
 }
