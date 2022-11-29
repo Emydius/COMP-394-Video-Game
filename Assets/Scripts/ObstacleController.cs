@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    public GameObject rock;
+    public GameObject rockPrefab;
+    public PlayerMovement movement;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,8 @@ public class ObstacleController : MonoBehaviour
 
     void CreateObstacle()
     {
-        Instantiate(rock, new Vector3(58, 26, 0), Quaternion.identity);
+        GameObject rock = Instantiate(rockPrefab, new Vector3(58, 26, 0), Quaternion.identity);
+        FallenAcorn fallenAcornScript = rock.GetComponent<FallenAcorn>();
+        fallenAcornScript.playerHit.AddListener(movement.ResetPlayer);
     }
 }
