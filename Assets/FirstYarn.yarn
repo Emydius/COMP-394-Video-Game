@@ -7,8 +7,6 @@ Squirrel: Hey, who's that? Get out of here!
 -> Bug: Sorry, I’ll get out of your way!
 	Squirrel: Don't be so considerate! Show some backbone, you exoskeletal creature!
 
-Bug: Well, it seems like you're looking for something. Did you lose anything?
-Squirrel: Yeah, I've lost my blueberry muffin. I've searched high and low but still, nothing. If you find it, you'd better not run off with it!
 Squirrel: Wait, you're distracting me! I still don't know what a bug like you is doing this high up in the tree!
 ->Bug: I'm on my way to prove my innocence to the birds.
     <<jump Reason1>>
@@ -19,18 +17,12 @@ Squirrel: Wait, you're distracting me! I still don't know what a bug like you is
 
 title: Reason1
 ---
-Squirrel: The birds, you say? That's an admirable goal, and certainly more important than my blueberry muffin. Sounds like a fun trunk trip too.
-Bug: (He's changing his mind that quickly…?)
+Squirrel: The birds, you say? That's an admirable goal...
 Squirrel: It sure would be fun to come along with you on a quest to the Canopy.
 Squirrel: There's something about your eyes that tells me everything I need to know about you.
-Squirrel: Their intensity…their drive…now that I take a closer look, I see you're actually a really trustworthy fellow!
-Bug: We've barely spoken for 2 minutes. Weren't you just yelling at me to go away a couple dialogue boxes ago?
-Squirrel: That may be so, but you've just got this aura about you...the longer I'm in your presence, the more I'm convinced...
 Squirrel: I've made up my mind. I'm coming with you! You'll need my help. 
-Squirrel: I can teach you some of my tricks for dashing. They've helped me out of more scrapes than I can count on both paws!
-Bug: Gee…that'd be super! I could work on my agility, that's for sure.
-Squirrel: Happy to help! Alright, let me walk you through the basics…
-<<jump Tutorial>>
+Bug: Gee, that'd be super! I'll take all the help I can get.
+
 ===
 
 title: Reason2
@@ -41,17 +33,13 @@ Bug: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my 
 <<jump Reason1>>
 ===
 
-title: Tutorial
----
-Squirrel: Hold down the Z key to dash. If you're dashing, you can run through sticky sap or on top of water. 
-Squirrel: I try dashing in every part of my day. You never know what you might discover if you dash!
-===
+
 
 title: EndofLevel
 tags:
 ---
 Bug: Is that a village over there?
-Squirrel: It's my hometown. Acropolis. Greatest squirrel settlement this side of the Great Tree's Trunk.
+Squirrel: It's my hometown. Greatest squirrel settlement this side of the Great Tree's Trunk.
 Squirrel: They kicked me out because the bird queen wanted a bite of my muffin.
 Squirrel: I wouldn't let her have it, of course. It was my Grandma Squirrel's last gift to me!
 Squirrel: So, she declared me a threat to the throne and ordered my dismissal from here. If I show my face I'll be chased out with sharpened claws!
