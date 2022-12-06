@@ -190,7 +190,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ResetPlayer(){
-        Vector2 resetPosition = new Vector2(-660f, 264f);
+        Vector2 resetPosition = new Vector2(-660f, 264f); 
+        Quaternion resetRotation = new Quaternion(0,0,0,0);
+        transform.rotation = resetRotation;
         body.transform.position = resetPosition;
     }
 
