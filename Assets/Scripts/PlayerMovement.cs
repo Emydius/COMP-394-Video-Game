@@ -17,6 +17,14 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
     private bool dashing;
+
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 20f;
+    private float dashingTime = 0.4f;
+    private float dashingCooldown = 1f;
+    [SerializeField] private TrailRenderer tr;
+
     
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed; // Allows us to set speed within Unity while keeping it a private variable, for security reasons.
@@ -45,15 +53,25 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     private void FixedUpdate() {
-        if(!frozen){
-            velocity = body.velocity.magnitude;
-            // Limits velocity (we require a big force to accelerate the bug quickly, but don't want it to actually go that fast)
-            if (body.velocity.magnitude > 10f)
-                body.velocity = body.velocity.normalized * 10f;
 
-        // Limits velocity (we require a big force to accelerate the bug quickly, but don't want it to actually go that fast)
-            if (dashing) {
-                maxSpeed = 40f;
+        
+
+        if(!frozen){
+            if (Input.GetKey(KeyCode.Z) && canDash) {
+                    // currentGravity =  gravConstant/3;
+                    // body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
+                    // body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
+                    // jumpSound.Play();
+                    // jumpBuffer = 0.3f;
+                    // dashing = true;
+                    StartCoroutine(Dash());
+                }
+
+            velocity = body.velocity.magnitude;
+
+            // Limits velocity (we require a big force to accelerate the bug quickly, but don't want it to actually go that fast)
+            if (isDashing) {
+                maxSpeed = 18f;
             } else maxSpeed = 10f;
             if (body.velocity.magnitude > maxSpeed)
                 body.velocity = body.velocity.normalized * maxSpeed;
@@ -70,13 +88,15 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded()) {
             // Purple bug if grounded; debugging to see if bug grounds properly
                 GetComponent<SpriteRenderer>().sprite = groundedBug;
-                dashing = false;
-
-                currentGravity = gravConstant;
+                
                 // If bug is grounded, regular gravity turns off and relative gravity turns on to make it stick to surfaces
                 gravity.force = Vector2.zero;
                 gravity.relativeForce = new Vector2(0, currentGravity);
-
+                
+                if (isDashing) {
+                    return;
+                }
+                    
                 // Actually moves character relative to its orientation, if grounded
                 body.AddRelativeForce(new Vector2(horizontalInput*speed, 0));
 
@@ -90,13 +110,14 @@ public class PlayerMovement : MonoBehaviour
                     jumpSound.Play();
                     jumpBuffer = 0.3f;
                 // Use Z to dash in a specific direction by adding an impulse in that direction; same jump buffer
-                } else if (Input.GetKey(KeyCode.Z)) {
-                    currentGravity =  gravConstant/3;
-                    body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
-                    body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
-                    jumpSound.Play();
-                    jumpBuffer = 0.3f;
-                    dashing = true;
+                // } else if (Input.GetKey(KeyCode.Z) && canDash) {
+                //     // currentGravity =  gravConstant/3;
+                //     // body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
+                //     // body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
+                //     // jumpSound.Play();
+                //     // jumpBuffer = 0.3f;
+                //     // dashing = true;
+                //     StartCoroutine(Dash());
                 }
             }
             else {
@@ -108,6 +129,10 @@ public class PlayerMovement : MonoBehaviour
                 // If bug isn't grounded, regular gravity is applied to make it fall
                 gravity.relativeForce = Vector2.zero;
                 gravity.force = new Vector2(0, currentGravity);
+                
+                if (isDashing) {
+                    return;
+                }
                 
                 // Helps rotate the player upright mid-air if it has rotated unsafely, curved to be smooth
                 if (Mathf.Abs(transform.rotation.eulerAngles.z) > 20 ) {
@@ -126,11 +151,20 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    // private IEnumerator Dash() {
-        // canDash = false;
-        // isDashing = true;
-        // currentGravity = 0;
-    // }
+    private IEnumerator Dash() {
+        canDash = false;
+        isDashing = true;
+        currentGravity = 0;
+        body.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))*dashingPower;
+        tr.emitting = true;
+        yield return new WaitForSeconds(dashingTime);
+        tr.emitting = false;
+        currentGravity = gravConstant;
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+
+    }
 
     // Returns boolean based on if the player is grounded
     private bool isGrounded() {
