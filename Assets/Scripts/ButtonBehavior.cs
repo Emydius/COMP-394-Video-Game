@@ -19,7 +19,8 @@ public class ButtonBehavior : MonoBehaviour
 
     public void startButton() {
         Debug.Log("Hit Start");
-        SceneManager.LoadScene("FirstLevelScene");
+        //SceneManager.LoadScene("FirstLevelScene");
+        SceneManager.LoadScene("OpeningScene");
     }
 
     public void exitButton() {
