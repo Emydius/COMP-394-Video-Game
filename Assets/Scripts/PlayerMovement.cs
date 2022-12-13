@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float flipTimer = 1;
     private float jumpBuffer = 0.3f;
     private float maxSpeed;
+    [SerializeField] private float jumpForce = 20f;
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
     private bool dashing;
@@ -106,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                     jumpBuffer -= Time.deltaTime;
                 } else if (Input.GetKey(KeyCode.Space)) {
                     // Use space to jump by adding an impulse upward, reset jump buffer timer if jumping
-                    body.AddRelativeForce(new Vector2(0, 10f), ForceMode2D.Impulse);
+                    body.AddRelativeForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                     jumpSound.Play();
                     jumpBuffer = 0.3f;
                 // Use Z to dash in a specific direction by adding an impulse in that direction; same jump buffer
