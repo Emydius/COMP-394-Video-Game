@@ -1,7 +1,6 @@
 ﻿title: First
 ---
 Nuss: Hey, who's that? Get out of here!
-
 -> Shelldon: That's a rude way to greet someone. What did I ever do to you?
 	Nuss: I guess you’re right, my apologies.
 -> Shelldon: Sorry, I’ll get out of your way!
@@ -24,7 +23,7 @@ Nuss: I've made up my mind. I'm coming with you! You'll need my help.
 Shelldon: Gee, that'd be super! I'll take all the help I can get.
 Nuss: I can teach you some of my tricks for dashing. They've helped me out of more scrapes that I can count on both paws!
 Nuss: Try pressing Z to get a burst of speed!
-<<enable_dash>>
+	<<enable_dash Player>>
 ===
 
 title: Reason2
@@ -34,8 +33,6 @@ Nuss: I still don't believe you. A little bug like you would never try to scale 
 Shelldon: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my innocence to the birds.
 <<jump Reason1>>
 ===
-
-
 
 title: EndofLevel
 tags:

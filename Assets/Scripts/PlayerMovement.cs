@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
     private bool dashing;
-    private bool dashEnabled = false; //should be enabled when dialogue with squirrel finishes
+    [SerializeField] private bool dashEnabled = false; //should be enabled when dialogue with squirrel finishes
 
     private bool canDash = true;
     private bool isDashing;
@@ -217,10 +217,7 @@ public class PlayerMovement : MonoBehaviour
 
     void NormalSpeed()
     {
-       
          speed=speed/0.7f;
-       
-
     }
 
     public void ResetPlayer(){
@@ -232,6 +229,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void FreezePlayer (){
         frozen = true;
+        Debug.Log("frozen");
     }
 
     public void UnfreezePlayer(){
@@ -241,7 +239,7 @@ public class PlayerMovement : MonoBehaviour
 
     [YarnCommand("enable_dash")]
     void EnableDash(){
-        canDash = true;
+        dashEnabled = true;
         Debug.Log("dash now allowed");
     }
 }
