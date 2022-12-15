@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate() {
         if(!frozen){
-            if (Input.GetKey(KeyCode.Z) && canDash) {
+            if (Input.GetKey(KeyCode.Z) && canDash && dashEnabled) {
                     StartCoroutine(Dash());
                 }
 
