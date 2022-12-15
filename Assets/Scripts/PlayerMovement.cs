@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource jumpSound;
     private bool potentiallyFlipped;
     private bool dashing;
+    private bool dashEnabled = false; //should be enabled when dialogue with squirrel finishes
 
     private bool canDash = true;
     private bool isDashing;
@@ -54,11 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     private void FixedUpdate() {
-
-        
-
         if(!frozen){
-            if (Input.GetKey(KeyCode.Z) && canDash) {
+            if (Input.GetKey(KeyCode.Z) && canDash && dashEnabled) {
                     // currentGravity =  gravConstant/3;
                     // body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
                     // body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
@@ -237,5 +236,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void UnfreezePlayer(){
         frozen = false;
+        Debug.Log("unfrozen");
+    }
+
+    [YarnCommand("enable_dash")]
+    void EnableDash(){
+        canDash = true;
+        Debug.Log("dash now allowed");
     }
 }

@@ -1,35 +1,37 @@
 ﻿title: First
 ---
-Squirrel: Hey, who's that? Get out of here!
+Nuss: Hey, who's that? Get out of here!
 
--> Bug: That's a rude way to greet someone. What did I ever do to you?
-	Squirrel: I guess you’re right, my apologies.
--> Bug: Sorry, I’ll get out of your way!
-	Squirrel: Don't be so considerate! Show some backbone, you exoskeletal creature!
+-> Shelldon: That's a rude way to greet someone. What did I ever do to you?
+	Nuss: I guess you’re right, my apologies.
+-> Shelldon: Sorry, I’ll get out of your way!
+	Nuss: Don't be so considerate! Show some backbone, you exoskeletal creature!
 
-Squirrel: Wait, you're distracting me! I still don't know what a bug like you is doing this high up in the tree!
-->Bug: I'm on my way to prove my innocence to the birds.
+Nuss: Wait, you're distracting me! I still don't know what a little bug like you is doing this high up in the tree!
+->Shelldon: I'm on my way to prove my innocence to the birds.
     <<jump Reason1>>
-->Bug: I'm on a sightseeing tour!
-	Squirrel: I don't believe that for a second.
+->Shelldon: I'm on a sightseeing tour!
+	Nuss: I don't believe that for a second.
     <<jump Reason2>>
 ===
 
 title: Reason1
 ---
-Squirrel: The birds, you say? That's an admirable goal...
-Squirrel: It sure would be fun to come along with you on a quest to the Canopy.
-Squirrel: There's something about your eyes that tells me everything I need to know about you.
-Squirrel: I've made up my mind. I'm coming with you! You'll need my help. 
-Bug: Gee, that'd be super! I'll take all the help I can get.
-
+Nuss: The birds, you say? That's an admirable goal...
+Nuss: It sure would be fun to come along with you on a quest to the Canopy.
+Nuss: There's something about your eyes that tells me everything I need to know about you.
+Nuss: I've made up my mind. I'm coming with you! You'll need my help. 
+Shelldon: Gee, that'd be super! I'll take all the help I can get.
+Nuss: I can teach you some of my tricks for dashing. They've helped me out of more scrapes that I can count on both paws!
+Nuss: Try pressing Z to get a burst of speed!
+<<enable_dash>>
 ===
 
 title: Reason2
 ---
-Bug: No, no, it's true . . . I just really want to see what this tree has to offer.
-Squirrel: I still don't believe you. A little bug like you would never try to scale the tree, not with the birds always prowling around!
-Bug: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my innocence to the birds.
+Shelldon: No, no, it's true . . . I just really want to see what this tree has to offer.
+Nuss: I still don't believe you. A little bug like you would never try to scale the tree, not with the birds always prowling around!
+Shelldon: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my innocence to the birds.
 <<jump Reason1>>
 ===
 
@@ -38,19 +40,19 @@ Bug: Okay . . . you're right. I'm actually on my way to the Canopy, to prove my 
 title: EndofLevel
 tags:
 ---
-Bug: Is that a village over there?
-Squirrel: It's my hometown. Greatest squirrel settlement this side of the Great Tree's Trunk.
-Squirrel: They kicked me out because the bird queen wanted a bite of my muffin.
-Squirrel: I wouldn't let her have it, of course. It was my Grandma Squirrel's last gift to me!
-Squirrel: So, she declared me a threat to the throne and ordered my dismissal from here. If I show my face I'll be chased out with sharpened claws!
-Bug: That's awful that the queen would do that to you. I'd heard stories of the birds' atrocities, but now that I've experienced them firsthand, I really get it.
-Bug: I also got exiled from my home. They accused me of stealing an egg from one of their nests. So they burnt my village to the ground.
-Bug: I wanted to help rebuild but Chief Arachna said I was "banished".
-Bug: And all because of a stupid egg. What would I ever want with an egg? It's not like I could eat it with a live bird inside.
-Squirrel: Well hey, what are the odds that us two outcasts would find each other? Seems like destiny wove our paths together.
-Squirrel: Hey, I just thought of something! We both have bones to pick with the birdbrains. What if, when you're visiting the birds, I petition for my freedom too?
-Bug: I'm not gonna stop you from getting a reward there too. Plus, you've been so helpful with your dashing lessons.
-Squirrel: Huh, you're right. I've been so charitable and didn't expect anything in return! Well, I'm looking forward to it--when I'm through with those birdbrains, they'll HAVE to let me back home!
-Squirrel: But that time hasn't come yet. Come on, let's keep moving before they spot my furry outlawed face.
+Shelldon: Is that a village over there?
+Nuss: It's my hometown. Greatest squirrel settlement this side of the Great Tree's Trunk.
+Nuss: They kicked me out because the bird queen wanted a bite of my muffin.
+Nuss: I wouldn't let her have it, of course. It was my Grandma Squirrel's last gift to me!
+Nuss: So, she declared me a threat to the throne and ordered my dismissal from here. If I show my face I'll be chased out with sharpened claws!
+Shelldon: That's awful that the queen would do that to you. I'd heard stories of the birds' atrocities, but now that I've experienced them firsthand, I really get it.
+Shelldon: I also got exiled from my home. They accused me of stealing an egg from one of their nests. So they burnt my village to the ground.
+Shelldon: I wanted to help rebuild but Chief Arachna said I was "banished".
+Shelldon: And all because of a stupid egg. What would I ever want with an egg? It's not like I could eat it with a live bird inside.
+Nuss: Well hey, what are the odds that us two outcasts would find each other? Seems like destiny wove our paths together.
+Nuss: Hey, I just thought of something! We both have bones to pick with the birdbrains. What if, when you're visiting the birds, I petition for my freedom too?
+Shelldon: I'm not gonna stop you from getting a reward there too. Plus, you've been so helpful with your dashing lessons.
+Nuss: Huh, you're right. I've been so charitable and didn't expect anything in return! Well, I'm looking forward to it--when I'm through with those birdbrains, they'll HAVE to let me back home!
+Nuss: But that time hasn't come yet. Come on, let's keep moving before they spot my furry outlawed face.
 
 ===
