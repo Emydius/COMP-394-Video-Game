@@ -59,12 +59,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(!frozen){
             if (Input.GetKey(KeyCode.Z) && canDash) {
-                    // currentGravity =  gravConstant/3;
-                    // body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
-                    // body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
-                    // jumpSound.Play();
-                    // jumpBuffer = 0.3f;
-                    // dashing = true;
                     StartCoroutine(Dash());
                 }
 
@@ -87,8 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
 
             if (isGrounded()) {
-            // Purple bug if grounded; debugging to see if bug grounds properly
-                GetComponent<SpriteRenderer>().sprite = groundedBug;
                 
                 // If bug is grounded, regular gravity turns off and relative gravity turns on to make it stick to surfaces
                 gravity.force = Vector2.zero;
@@ -110,22 +102,11 @@ public class PlayerMovement : MonoBehaviour
                     body.AddRelativeForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                     jumpSound.Play();
                     jumpBuffer = 0.3f;
-                // Use Z to dash in a specific direction by adding an impulse in that direction; same jump buffer
-                // } else if (Input.GetKey(KeyCode.Z) && canDash) {
-                //     // currentGravity =  gravConstant/3;
-                //     // body.AddForce(new Vector2(horizontalInput, 0) * 2000, ForceMode2D.Force);
-                //     // body.AddForce(new Vector2(0, Input.GetAxisRaw("Vertical")) * 2000, ForceMode2D.Force);
-                //     // jumpSound.Play();
-                //     // jumpBuffer = 0.3f;
-                //     // dashing = true;
-                //     StartCoroutine(Dash());
                 }
             }
             else {
 
                 jumpBuffer = 0.3f;
-                // Brown if mid air; debugging
-                GetComponent<SpriteRenderer>().sprite = bug;
 
                 // If bug isn't grounded, regular gravity is applied to make it fall
                 gravity.relativeForce = Vector2.zero;
@@ -141,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 // If bug is on it backs, starts a timer to flip and also makes it green for debugging purposes
                 if (isFlipped()) {
-                    GetComponent<SpriteRenderer>().sprite = flippedBug;
+                    // I forgor what goes here
                 }
                 else {
                     // This actually makes the bug move; only executes if bug isn't flipped
@@ -152,6 +133,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    // Coroutine allowing player to dash. Turns off gravity and permanently sets velocity to specified direction. After waiting for dashingTime, reverts to normal.
     private IEnumerator Dash() {
         canDash = false;
         isDashing = true;

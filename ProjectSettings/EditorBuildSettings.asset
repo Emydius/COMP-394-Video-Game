@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlayTestingScene.unity
     guid: 750dd50b6829ee948b6816ac33d6256a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TitleScreen.unity
     guid: d2031d9f494e4af4fad3fe94c91118ec
   - enabled: 1
     path: Assets/Scenes/FirstLevelScene.unity
     guid: 4d748d9c809504414b6239e2bc6339ac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OpeningScene.unity
     guid: 44af578a250534343b520e8b3485cb64
   m_configObjects: {}
