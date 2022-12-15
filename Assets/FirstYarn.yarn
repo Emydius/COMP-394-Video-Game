@@ -6,7 +6,7 @@ Nuss: Hey, who's that? Get out of here!
 -> Shelldon: Sorry, I’ll get out of your way!
 	Nuss: Don't be so considerate! Show some backbone, you exoskeletal creature!
 
-Nuss: Wait, you're distracting me! I still don't know what a little bug like you is doing this high up in the tree!
+Nuss: Wait, you're distracting me! I don't know what a little bug like you is doing this high up in the tree!
 ->Shelldon: I'm on my way to prove my innocence to the birds.
     <<jump Reason1>>
 ->Shelldon: I'm on a sightseeing tour!

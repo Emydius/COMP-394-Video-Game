@@ -20,7 +20,7 @@ public class ObstacleController : MonoBehaviour
 
     void CreateObstacle()
     {
-        GameObject rock = Instantiate(rockPrefab, new Vector3(-544.6f, 330.6f, 0), Quaternion.identity);
+        GameObject rock = Instantiate(rockPrefab, new Vector3(-470f, 380f, 0), Quaternion.identity);
         FallenAcorn fallenAcornScript = rock.GetComponent<FallenAcorn>();
         fallenAcornScript.playerHit.AddListener(movement.ResetPlayer);
     }
